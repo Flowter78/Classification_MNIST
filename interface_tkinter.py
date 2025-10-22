@@ -15,6 +15,14 @@ canvas_width, canvas_height = 280, 280
 canvas = tk.Canvas(root, width=canvas_width, height=canvas_height, bg="white")
 canvas.grid(row=0, column=0, columnspan=2)
 
+
+# Affichage de l'image avant prédiction
+def show_img(img):
+    plt.imshow(img, cmap="gray")
+    plt.title("Image envoyée au modèle")
+    plt.axis("off")
+    plt.show()
+
 # Dessin à la souris
 drawing = False
 def start_draw(event):
@@ -43,20 +51,21 @@ def predict_digit():
     y1 = y + canvas.winfo_height()
 
     img = ImageGrab.grab().crop((x, y, x1, y1))
+    # show_img(img)
     img = img.convert("L")
+    # show_img(img)   
     img = ImageOps.invert(img)
+    # show_img(img)
     img = img.resize((28, 28))
-
-    # Affichage de l'image avant prédiction
-    plt.imshow(img, cmap="gray")
-    plt.title("Image envoyée au modèle")
-    plt.axis("off")
-    plt.show()
+    # show_img(img)
 
     # Préparation pour prédiction
     img = np.array(img) / 255.0
+    show_img(img)
     img = np.expand_dims(img, axis=-1)
+    show_img(img)
     img = np.expand_dims(img, axis=0)
+    # show_img(img)
 
     # Prédiction
     pred = model.predict(img)

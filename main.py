@@ -34,8 +34,8 @@ model.save("mnist_model.h5")
 
 
 ###################################################################### venv\Scripts\activate  python main.py  python tkinter.py
-
 """
+# Attention aux parametres d'affichage windows->100% pas 125%
 
 # Prendre une image au hasard du jeu de test
 i = np.random.randint(0, len(x_test))
